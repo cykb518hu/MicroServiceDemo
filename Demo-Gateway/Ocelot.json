@@ -1,0 +1,40 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/{url}",
+      "DownstreamScheme": "http",
+      "UpstreamPathTemplate": "/StudentService/{url}",
+      "UpstreamHttpMethod": [ "Get", "Post" ],
+      "ServiceName": "StudentService",
+      "LoadBalancerOptions": { "Type": "LeastConnection" }
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5000",
+    "ServiceDiscoveryProvider": {
+      "Host": "1.15.60.122",
+      "Port": 8100,
+      "Type": "Consul"
+    }
+  }
+
+  //"Routes": [
+  //  {
+  //    "DownstreamPathTemplate": "/{url}",
+  //    "DownstreamScheme": "http",
+  //    "DownstreamHostAndPorts": [
+  //      {
+  //        "Host": "localhost",
+  //        "Port": 5124
+  //      }
+  //    ],
+  //    "UpstreamPathTemplate": "/LogService/{url}",
+  //    "UpstreamHttpMethod": [ "Get", "Post" ]
+
+
+  //  }
+  //],
+  //"GlobalConfiguration": {
+  //  "BaseUrl": "http://localhost:4727"
+  //}
+}
