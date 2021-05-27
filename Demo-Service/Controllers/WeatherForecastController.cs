@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Demo_Service.Controllers
@@ -42,17 +44,20 @@ namespace Demo_Service.Controllers
     public class StudentController : ControllerBase
     {
         private readonly ILogger<StudentController> _logger;
+        private readonly IConfiguration _configuration;
 
-        public StudentController(ILogger<StudentController> logger)
+        public StudentController(ILogger<StudentController> logger, IConfiguration configuration)
         {
             _logger = logger;
+            _configuration = configuration;
         }
 
         [Route("name")]
         public string Name()
         {
-
-            return $"my name is {Guid.NewGuid()}, current port is:{ Request.Host.Port}";
+            var port=_configuration.GetValue<string>("LocalPort");
+            Thread.Sleep(900);
+            return $" name method {Guid.NewGuid()}, current port is:{ port}";
         }
 
         [HttpGet]
