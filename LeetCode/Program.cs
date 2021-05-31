@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LeetCode
 {
@@ -14,10 +15,11 @@ namespace LeetCode
             //var nums = new int[] { 3, 3};
             //var result = TwoSum(nums, target);
             //Console.WriteLine($"[{result[0]},{result[1]}]");
-            var str = "MCMXCIV";
-            var result = RomanToInt(str);
+            var strs = "[([]])";
+            var result = IsValid(strs);
 
-            
+
+
             Console.WriteLine(result);
 
             Console.ReadLine();
@@ -223,6 +225,158 @@ namespace LeetCode
             //}
 
             //return result;
+        }
+
+
+        /// <summary>
+        /// 编写一个函数来查找字符串数组中的最长公共前缀。
+        /// 如果不存在公共前缀，返回空字符串 ""。
+        /// </summary>
+        /// <param name="strs"></param>
+        /// <returns></returns>
+        public static string LongestCommonPrefix(string[] strs)
+        {
+            if (strs.Length > 0)
+            {
+                if(strs.Length==1)
+                {
+                    return strs[0];
+                }
+                var stop = false;
+                var prev = strs[0];
+                var arr = new List<char>();
+                for (int i = 0; i < prev.Length; i++)
+                {
+                    for (int j = 1; j < strs.Length; j++)
+                    {
+                        if (i < strs[j].Length && prev[i] == strs[j][i])
+                        {
+                            
+                        }
+                        else
+                        {
+                            stop = true;
+                            break;                         
+                        }
+                    }
+                    if(stop)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        arr.Add(prev[i]);
+                    }
+                }
+                return string.Join("", arr);
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+
+        public static bool IsValid(string s)
+        {
+
+            Dictionary<char, int> charArr = new Dictionary<char, int>();
+            charArr.Add('(', 1);
+            charArr.Add('[', 2);
+            charArr.Add('{', 3);
+            charArr.Add(')', -1);
+            charArr.Add(']', -2);
+            charArr.Add('}', -3);
+            if (s.Length % 2 == 1)
+            {
+               return false;
+            }
+            var arr = new List<char>();
+            foreach(char r in s)
+            {
+                if (charArr[r] > 0)
+                {
+                    arr.Add(r);
+                }
+                else
+                {
+                    if (arr.Any() && (charArr[r] + charArr[arr.LastOrDefault()] == 0))
+                    {
+                        arr.RemoveAt(arr.Count - 1);
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            return !arr.Any();
+
+
+            #region
+            //Dictionary<char, int> pArr = new Dictionary<char, int>();
+            //pArr.Add( '(',1);
+            //pArr.Add('[',2);
+            //pArr.Add('{', 3);
+
+            //Dictionary<char, int> nArr = new Dictionary<char, int>();
+            //nArr.Add(')', -1);
+            //nArr.Add(']', -2);
+            //nArr.Add('}', -3);
+
+            //var result = true;
+            //var arr =new List<char>();
+            //if (s.Length == 1)
+            //{
+            //    result = false;
+            //}
+            //else
+            //{
+            //    int i = 0;
+            //    while (i < s.Length)
+            //    {
+            //        if (arr.Any())
+            //        {
+            //            var last = arr.LastOrDefault();
+            //            if (pArr.ContainsKey(s[i]))
+            //            {
+            //                arr.Add(s[i]);
+            //            }
+            //            else if (nArr.ContainsKey(s[i]))
+            //            {
+            //                if (pArr[last] + nArr[s[i]] == 0)
+            //                {
+            //                    arr.RemoveAt(arr.Count - 1);
+            //                }
+            //                else
+            //                {
+            //                    result = false;
+            //                    break;
+            //                }
+            //            }
+            //        }
+            //        else
+            //        {
+            //            if (pArr.ContainsKey(s[i]))
+            //            {
+            //                arr.Add(s[i]);
+            //            }
+            //            else
+            //            {
+            //                result = false;
+            //                break;
+            //            }
+            //        }
+            //        i++;
+            //    }
+            //}
+            //if(arr.Any())
+            //{
+            //    result = false;
+            //}
+            //return result;
+            #endregion
+
         }
     }
 }

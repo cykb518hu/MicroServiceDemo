@@ -9,7 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo-Service", "Demo-Servic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo-Gateway", "Demo-Gateway\Demo-Gateway.csproj", "{BC9D566F-7172-4C50-B922-6EC16EF9751D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeetCode", "LeetCode\LeetCode.csproj", "{66E46199-4383-425C-9646-112F08358D3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeetCode", "LeetCode\LeetCode.csproj", "{66E46199-4383-425C-9646-112F08358D3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Muti-Threed", "Muti-Threed\Muti-Threed.csproj", "{AA4EC5B6-CAF8-436F-B7CE-B67527FFD9A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfThread", "WpfThread\WpfThread.csproj", "{7ED035B6-240A-444E-B0C7-FFF47F0CD7B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{66E46199-4383-425C-9646-112F08358D3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66E46199-4383-425C-9646-112F08358D3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66E46199-4383-425C-9646-112F08358D3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA4EC5B6-CAF8-436F-B7CE-B67527FFD9A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA4EC5B6-CAF8-436F-B7CE-B67527FFD9A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA4EC5B6-CAF8-436F-B7CE-B67527FFD9A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA4EC5B6-CAF8-436F-B7CE-B67527FFD9A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7ED035B6-240A-444E-B0C7-FFF47F0CD7B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7ED035B6-240A-444E-B0C7-FFF47F0CD7B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7ED035B6-240A-444E-B0C7-FFF47F0CD7B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7ED035B6-240A-444E-B0C7-FFF47F0CD7B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
