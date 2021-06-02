@@ -9,6 +9,10 @@
     <Grid>
         <Button x:Name="button" Content="同步" HorizontalAlignment="Left" Margin="122,67,0,0" VerticalAlignment="Top" Click="btnSync_Click"/>
         <Button x:Name="button1" Content="异步" HorizontalAlignment="Left" Margin="136,140,0,0" VerticalAlignment="Top" Click="buAsync_Click"/>
+        <Button x:Name="button2" Content="高级" HorizontalAlignment="Left" Margin="136,225,0,0" VerticalAlignment="Top" Click="buThreadAdvanced_Click"/>
+        <Button x:Name="button3" Content="任务分配" HorizontalAlignment="Left" Margin="296,159,0,0" VerticalAlignment="Top" Click="button3_Click"/>
+        <Button x:Name="button4" Content="异步Await" HorizontalAlignment="Left" Margin="275,244,0,0" VerticalAlignment="Top" Click="button4_Click"/>
+        <Button x:Name="button5" Content="访问对象" HorizontalAlignment="Left" Margin="198,306,0,0" VerticalAlignment="Top" Click="button5_Click"/>
 
     </Grid>
 </Window>

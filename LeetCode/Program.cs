@@ -15,8 +15,9 @@ namespace LeetCode
             //var nums = new int[] { 3, 3};
             //var result = TwoSum(nums, target);
             //Console.WriteLine($"[{result[0]},{result[1]}]");
-            var strs = "[([]])";
-            var result = IsValid(strs);
+            var strs = "ABC";
+            int number = 2;
+            var result = Convert(strs, number);
 
 
 
@@ -113,9 +114,9 @@ namespace LeetCode
         /// </summary>
         /// <param name="x"></param>
         /// <returns></returns>
-        public static bool IsPalindrome(int x)
+        public static bool IsPalindrome(string x)
         {
-            if (x < 0)
+            if (string.IsNullOrEmpty(x))
             {
                 return false;
             }
@@ -378,5 +379,118 @@ namespace LeetCode
             #endregion
 
         }
+
+
+        /// <summary>
+        /// 给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static int LengthOfLongestSubstring(string s)
+        {
+
+
+            if (string.IsNullOrEmpty(s))
+            {
+                return 0;
+            }
+            int length = 0;
+            int j = 0;
+            Dictionary<char, int> arr = new Dictionary<char, int>();
+
+            
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (arr.ContainsKey(s[i]))
+                {
+                    length = length < j ? j : length;
+                    j = 0; ;
+                    i = arr[s[i]];
+                    arr.Clear();
+                }
+                else
+                {
+                    j++;
+                    arr.Add(s[i], i);
+                }
+            }
+            length = length < arr.Count ? arr.Count : length;
+            return length;
+        }
+
+
+
+        public static string LongestPalindrome(string s)
+        {
+            int maxLength = 0;
+            if (s.Length == 1)
+            {
+                return s;
+            }
+            Dictionary<string, int> arr = new Dictionary<string, int>();
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                for (int j = s.Length - i; j > maxLength; j--)
+                {
+                    var str = s.Substring(i, j);
+                    if (IsPalindrome(str))
+                    {
+                        maxLength = str.Length > maxLength ? str.Length : maxLength;
+                        arr[str] = str.Length;
+                    }
+                }
+            }
+            return arr.OrderBy(x => x.Value).LastOrDefault().Key;
+            // return "" ;
+        }
+
+
+        /// <summary>
+        /// 将一个给定字符串 s 根据给定的行数 numRows ，以从上往下、从左到右进行 Z 字形排列。
+        /// 之后，你的输出需要从左往右逐行读取，产生出一个新的字符串
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="numRows"></param>
+        /// <returns></returns>
+        public static string Convert(string s, int numRows)
+        {
+            if (numRows >= s.Length || numRows == 1)
+            {
+                return s;
+            }
+            var list = new List<Data>();
+            int j = 0;
+            for (var i = 0; i < s.Length; i++)
+            {
+
+                var data = new Data();
+                data.C = s[i];
+                data.Index = i;
+                data.Level = Math.Abs(j);
+                if (j < numRows - 1)
+                {
+                    j++;
+                }
+                else
+                {
+                    j--;
+                    j = 0 - j;
+                }
+                list.Add(data);
+            }
+            list = list.OrderBy(x => x.Level).ThenBy(x => x.Index).ToList();
+            return string.Join("", list.Select(x => x.C));
+        }
+
+        public class Data
+        {
+            public char C { get; set; }
+            public int Index { get; set; }
+
+            public int Level { get; set; }
+        }
+
     }
+
 }
