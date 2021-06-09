@@ -15,7 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Muti-Threed", "Muti-Threed\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfThread", "WpfThread\WpfThread.csproj", "{7ED035B6-240A-444E-B0C7-FFF47F0CD7B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AwaitAsync", "AwaitAsync\AwaitAsync.csproj", "{A25FE780-DAEF-4220-9450-366EF244A14C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AwaitAsync", "AwaitAsync\AwaitAsync.csproj", "{A25FE780-DAEF-4220-9450-366EF244A14C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DelegateDemo", "DelegateDemo\DelegateDemo.csproj", "{368B803F-D341-43EA-9C69-1FE7ACEE101A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo-SendEmailService", "Demo-SendEmailService\Demo-SendEmailService.csproj", "{6AE4A9C7-F0EC-41CD-B710-5A75054A177F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,14 @@ Global
 		{A25FE780-DAEF-4220-9450-366EF244A14C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A25FE780-DAEF-4220-9450-366EF244A14C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A25FE780-DAEF-4220-9450-366EF244A14C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{368B803F-D341-43EA-9C69-1FE7ACEE101A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{368B803F-D341-43EA-9C69-1FE7ACEE101A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{368B803F-D341-43EA-9C69-1FE7ACEE101A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{368B803F-D341-43EA-9C69-1FE7ACEE101A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AE4A9C7-F0EC-41CD-B710-5A75054A177F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AE4A9C7-F0EC-41CD-B710-5A75054A177F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AE4A9C7-F0EC-41CD-B710-5A75054A177F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AE4A9C7-F0EC-41CD-B710-5A75054A177F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

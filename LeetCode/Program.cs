@@ -12,12 +12,12 @@ namespace LeetCode
             Console.WriteLine("Hello World!");
 
             //int target = 6;
-            //var nums = new int[] { 3, 3};
+            var nums = new int[] { -4, -2, 1, -5, -4, -4, 4, -2, 0, 4, 0, -2, 3, 1, -5, 0};
             //var result = TwoSum(nums, target);
             //Console.WriteLine($"[{result[0]},{result[1]}]");
             var strs = "ABC";
-            int number = 2;
-            var result = Convert(strs, number);
+            int number = 1994;
+            var result = ThreeSum(nums);
 
 
 
@@ -226,6 +226,42 @@ namespace LeetCode
             //}
 
             //return result;
+        }
+
+        public static string IntToRoman(int num)
+        {
+           // int length = 0;
+            //length = num / r.Key;
+            //num = num % r.Key;
+            //while (length > 0)
+            //{
+            //    result += r.Value;
+            //    length--;
+            //}
+            var result = string.Empty;
+            Dictionary<int, string> data = new Dictionary<int, string>();
+            data.Add(1000,"M" );
+            data.Add(900, "CM");
+            data.Add(500, "D");
+            data.Add(400, "CD");
+            data.Add(100, "C");
+            data.Add(90, "XC");
+            data.Add(50, "L");
+            data.Add(40, "XL");
+            data.Add(10, "X");
+            data.Add(9,"IX");
+            data.Add(5, "V");
+            data.Add(4, "IV");
+            data.Add(1, "I");
+            foreach (var r in data)
+            {
+                while (num >= r.Key)
+                {
+                    num -= r.Key;
+                    result += r.Value;
+                }
+            }
+            return result;
         }
 
 
@@ -491,6 +527,118 @@ namespace LeetCode
             public int Level { get; set; }
         }
 
+
+        public static int MaxArea(int[] height)
+        {
+
+            int max = 0;
+
+            //for (int i = 0; i < height.Length; i++)
+            //{
+            //    for (int j = i + 1; j < height.Length; j++)
+            //    {
+            //        var number = height[i] > height[j] ? height[j] : height[i];
+            //        var total = number * (j - i);
+            //        max = max < total ? total : max;
+            //    }
+            //}
+            int i = 0;
+            int j = height.Length - 1;
+            while (i < j)
+            {
+                int left = height[i];
+                int right = height[j];
+                int temp = (j - i) * (left < right ? left : right);
+                max = max < temp ? temp : max;
+                if (left < right)
+                {
+                    ++i;
+                }
+                else
+                {
+                    --j;
+                }
+            }
+            return max;
+
+        }
+
+
+        public static IList<IList<int>> ThreeSum(int[] nums)
+        {
+            Dictionary<string, int> list = new Dictionary<string, int>();
+            IList<IList<int>> result = new List<IList<int>>();
+
+            var plist = nums.Where(x => x >= 0).ToArray<int>();
+            var nlist= nums.Where(x => x <0).ToArray<int>();
+            if (plist.Count(x => x == 0) >= 3)
+            {
+                IList<int> data = new List<int>();
+                data.Add(0);
+                data.Add(0);
+                data.Add(0);
+                var key = "000";
+                if (!list.ContainsKey(key))
+                {
+                    list[key] = 0;
+                    result.Add(data);
+                }
+            }
+
+
+            for (int i = 0; i < nlist.Length; i++)
+            {
+                for (int k = 0; k < plist.Length; k++)
+                {
+                    for (int j = k + 1; j < plist.Length; j++)
+                    {
+                        if (nlist[i] + plist[k] + plist[j] == 0)
+                        {
+                            IList<int> data = new List<int>();
+                            data.Add(nlist[i]);
+                            data.Add(plist[k]);
+                            data.Add(plist[j]);
+                            var key = string.Join("", data.OrderBy(x => x).ToList());
+                            if (!list.ContainsKey(key))
+                            {
+                                list[key] = 0;
+                                result.Add(data);
+                            }
+                            break;
+                        }
+                    }
+
+                }
+            }
+            for (int i = 0; i < nlist.Length; i++)
+            {
+                for (int k = i + 1; k < nlist.Length; k++)
+                {
+                    for (int j = 0; j < plist.Length; j++)
+                    {
+                        if (nlist[i] + nlist[k] + plist[j] == 0)
+                        {
+                            IList<int> data = new List<int>();
+                            data.Add(nlist[i]);
+                            data.Add(nlist[k]);
+                            data.Add(plist[j]);
+                            var key = string.Join("", data.OrderBy(x => x).ToList());
+                            if (!list.ContainsKey(key))
+                            {
+                                list[key] = 0;
+                                result.Add(data);
+                            }
+                            break;
+                        }
+                    }
+
+                }
+            }
+            return result;
+
+        }
+
+ 
     }
 
 }
