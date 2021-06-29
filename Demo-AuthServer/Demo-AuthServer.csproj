@@ -2,13 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Demo_SendEmailService</RootNamespace>
+    <RootNamespace>Demo_AuthServer</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Consul" Version="1.6.10.1" />
+    <PackageReference Include="IdentityServer4" Version="4.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.16" />
   </ItemGroup>
-
 
 </Project>

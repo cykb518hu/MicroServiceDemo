@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace LeetCode
 {
@@ -10,20 +12,63 @@ namespace LeetCode
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-
-            //int target = 6;
-            var nums = new int[] { -4, -2, 1, -5, -4, -4, 4, -2, 0, 4, 0, -2, 3, 1, -5, 0};
+            LeetCode1.Run();
+            int target = 6;
+            //var nums = new int[] { -4, -2, 1, -5, -4, -4, 4, -2, 0, 4, 0, -2, 3, 1, -5, 0};
             //var result = TwoSum(nums, target);
-            //Console.WriteLine($"[{result[0]},{result[1]}]");
-            var strs = "ABC";
-            int number = 1994;
-            var result = ThreeSum(nums);
+            ////Console.WriteLine($"[{result[0]},{result[1]}]");
+            //var strs = "2";
+            //int number = 4;
+            ////var result = LetterCombinations(strs);
+            //var result2 = GetNumber2(number);
 
 
+            //nums.Reverse();
 
-            Console.WriteLine(result);
+            //ArrayList alist = new ArrayList();
+            //alist.Add(1);
+            
+
+            //Console.WriteLine(result);
 
             Console.ReadLine();
+        }
+
+        public static int GetNumber(int m)
+        {
+            int result = 0;
+            for (int i = 1; i <= m; i++)
+            {
+                if ((i % 2) == 1)
+                {
+                    result += i;
+                }
+                else
+                {
+                    result -= i;
+                }
+            }
+            return result;
+        }
+        public static int GetNumber2(int m)
+        {
+            int result = 0;
+            result = -1 * (m / 2);
+            if ((m % 2) == 1)
+            {
+                result += m;
+            }
+            return result;
+        }
+        public static int GetNumber3(int m)
+        {
+            int result = 0;
+            result = -1 * (m / 2);
+            if ((m % 2) == 1)
+            {
+                result += m;
+            }
+            return result;
         }
 
         public static int[] TwoSum(int[] nums, int target)
@@ -566,79 +611,175 @@ namespace LeetCode
 
         public static IList<IList<int>> ThreeSum(int[] nums)
         {
-            Dictionary<string, int> list = new Dictionary<string, int>();
+
+
+            nums = nums.OrderBy(x => x).ToArray();
+            int length = nums.Length;
             IList<IList<int>> result = new List<IList<int>>();
 
-            var plist = nums.Where(x => x >= 0).ToArray<int>();
-            var nlist= nums.Where(x => x <0).ToArray<int>();
-            if (plist.Count(x => x == 0) >= 3)
+            for(int first = 0; first < length; first++)
             {
-                IList<int> data = new List<int>();
-                data.Add(0);
-                data.Add(0);
-                data.Add(0);
-                var key = "000";
-                if (!list.ContainsKey(key))
+                if (first > 0 && nums[first] == nums[first - 1])
                 {
-                    list[key] = 0;
-                    result.Add(data);
+                    continue;
                 }
-            }
+                int third = length - 1;
+                int target = -nums[first];
 
-
-            for (int i = 0; i < nlist.Length; i++)
-            {
-                for (int k = 0; k < plist.Length; k++)
+                for(int second = first + 1; second < length; second++)
                 {
-                    for (int j = k + 1; j < plist.Length; j++)
+                    if (second > first + 1 && nums[second] == nums[second - 1])
                     {
-                        if (nlist[i] + plist[k] + plist[j] == 0)
-                        {
-                            IList<int> data = new List<int>();
-                            data.Add(nlist[i]);
-                            data.Add(plist[k]);
-                            data.Add(plist[j]);
-                            var key = string.Join("", data.OrderBy(x => x).ToList());
-                            if (!list.ContainsKey(key))
-                            {
-                                list[key] = 0;
-                                result.Add(data);
-                            }
-                            break;
-                        }
+                        continue;
                     }
-
-                }
-            }
-            for (int i = 0; i < nlist.Length; i++)
-            {
-                for (int k = i + 1; k < nlist.Length; k++)
-                {
-                    for (int j = 0; j < plist.Length; j++)
+                    while (second < third && nums[second] + nums[third] > target)
                     {
-                        if (nlist[i] + nlist[k] + plist[j] == 0)
-                        {
-                            IList<int> data = new List<int>();
-                            data.Add(nlist[i]);
-                            data.Add(nlist[k]);
-                            data.Add(plist[j]);
-                            var key = string.Join("", data.OrderBy(x => x).ToList());
-                            if (!list.ContainsKey(key))
-                            {
-                                list[key] = 0;
-                                result.Add(data);
-                            }
-                            break;
-                        }
+                        --third;
                     }
+                    if (second == third)
+                    {
+                        break;
+                    }
+                    if (nums[second] + nums[third] == target)
+                    {
+                        IList<int> data = new List<int>();
+                        data.Add(nums[first]);
+                        data.Add(nums[second]);
+                        data.Add(nums[third]);
+                        result.Add(data);
 
+                    }
                 }
             }
+
+
+            //Dictionary<string, int> list = new Dictionary<string, int>();
+            //IList<IList<int>> result = new List<IList<int>>();
+
+            //var plist = nums.Where(x => x >= 0).ToArray<int>();
+            //var nlist= nums.Where(x => x <0).ToArray<int>();
+            //if (plist.Count(x => x == 0) >= 3)
+            //{
+            //    IList<int> data = new List<int>();
+            //    data.Add(0);
+            //    data.Add(0);
+            //    data.Add(0);
+            //    var key = "000";
+            //    if (!list.ContainsKey(key))
+            //    {
+            //        list[key] = 0;
+            //        result.Add(data);
+            //    }
+            //}
+
+
+            //for (int i = 0; i < nlist.Length; i++)
+            //{
+            //    for (int k = 0; k < plist.Length; k++)
+            //    {
+            //        for (int j = k + 1; j < plist.Length; j++)
+            //        {
+            //            if (nlist[i] + plist[k] + plist[j] == 0)
+            //            {
+            //                IList<int> data = new List<int>();
+            //                data.Add(nlist[i]);
+            //                data.Add(plist[k]);
+            //                data.Add(plist[j]);
+            //                var key = string.Join("", data.OrderBy(x => x).ToList());
+            //                if (!list.ContainsKey(key))
+            //                {
+            //                    list[key] = 0;
+            //                    result.Add(data);
+            //                }
+            //                break;
+            //            }
+            //        }
+
+            //    }
+            //}
+            //for (int i = 0; i < nlist.Length; i++)
+            //{
+            //    for (int k = i + 1; k < nlist.Length; k++)
+            //    {
+            //        for (int j = 0; j < plist.Length; j++)
+            //        {
+            //            if (nlist[i] + nlist[k] + plist[j] == 0)
+            //            {
+            //                IList<int> data = new List<int>();
+            //                data.Add(nlist[i]);
+            //                data.Add(nlist[k]);
+            //                data.Add(plist[j]);
+            //                var key = string.Join("", data.OrderBy(x => x).ToList());
+            //                if (!list.ContainsKey(key))
+            //                {
+            //                    list[key] = 0;
+            //                    result.Add(data);
+            //                }
+            //                break;
+            //            }
+            //        }
+
+            //    }
+            //}
             return result;
 
         }
 
- 
+
+        /// <summary>
+        /// 给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。答案可以按 任意顺序 返回
+        /// </summary>
+        /// <param name="digits"></param>
+        /// <returns></returns>
+        public static IList<string> LetterCombinations(string digits)
+        {
+            Dictionary<char, string> data = new Dictionary<char, string>();
+            data['2'] = "adc";
+            data['3'] = "def";
+            data['4'] = "ghi";
+            data['5'] = "jkl";
+            data['6'] = "mno";
+            data['7'] = "pqrs";
+            data['8'] = "tuv";
+            data['9'] = "wxyz"; 
+
+            IList<string> result = new List<string>();
+            backtrack(result, data, digits, 0, new StringBuilder());
+            return result;            
+        }
+
+        public static void backtrack(IList<string> combinations, Dictionary<char, string> phoneMap , string digits, int index, StringBuilder combination)
+        {
+            if (index==digits.Length)
+            {
+                combinations.Add(combination.ToString());
+            }
+            else
+            {
+                char digit = digits[index];
+                string letters = phoneMap[digit];
+                int lettersCount = letters.Length;
+                for (int i = 0; i < lettersCount; i++)
+                {
+
+                    combination.Append(letters[i]);
+                    backtrack(combinations, phoneMap, digits, index + 1, combination);
+                    combination.Remove(index, 1);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 给定一个包含 n 个整数的数组 nums 和一个目标值 target，判断 nums 中是否存在四个元素 a，b，c 和 d ，使得 a + b + c + d 的值与 target 相等？找出所有满足条件且不重复的四元组。
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static IList<IList<int>> FourSum(int[] nums, int target)
+        {
+            IList<IList<int>> result = new List<IList<int>>();
+            return result;
+        }
     }
 
 }
