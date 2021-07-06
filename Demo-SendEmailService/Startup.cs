@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,16 +38,46 @@ namespace Demo_SendEmailService
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(x =>
             {
+                // 对称加密
+                //x.RequireHttpsMetadata = false;
+                //x.SaveToken = true;
+                //x.TokenValidationParameters = new TokenValidationParameters
+                //{
+                //    ValidateIssuerSigningKey = true,
+                //    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(token.Secret)),
+                //    ValidIssuer = token.Issuer,
+                //    ValidAudience = token.Audience,
+                //    ValidateIssuer = false,
+                //    ValidateAudience = false
+                //};
+
+                //非对称加密
+
+                byte[] publicKey = Convert.FromBase64String(@"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsGMsazCB50tjSoj8z4lf
+/InJTOxbSPwBaac8btxFKY5+Qg48oZTk4Q5jjKqDVfBrh2ywURm5E0/IytljasPI
+cJbAOAZZF4Wu2623BUzLlcRopZAaHh/XzXcxfu4KkoD2nPNf15e58YgU+9GxVkEq
+/6quWU31YLxgXfbc/L9XPaK/iaRdy4cpHD+e3r0sC7mZxL2w6rTp6AV2KdqBbYbg
+v9+1DahRLw1XmZNvNP1sHuZNK9piIwlD4rFmVbxexvzsXNfIKZIvLhJahUF04+Ze
+QEiIOEyA4hHwvj3d465UU8DbgNl6sVjceLD9u2C93mtcc26xuHkD2bnC8ZAxuUhW
+kQIDAQAB");
+                using RSA rsa = RSA.Create();
+                rsa.ImportSubjectPublicKeyInfo(publicKey, out _);
                 x.RequireHttpsMetadata = false;
                 x.SaveToken = true;
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(token.Secret)),
                     ValidIssuer = token.Issuer,
                     ValidAudience = token.Audience,
                     ValidateIssuer = false,
-                    ValidateAudience = false
+                    ValidateAudience = false,
+
+                    //rsa.ExportParameters(false)  最开始没有加这个exportParameters 这个方法，就不行。
+                    IssuerSigningKey = new RsaSecurityKey(rsa.ExportParameters(false)),
+                    CryptoProviderFactory = new CryptoProviderFactory()
+                    {
+                        CacheSignatureProviders = false
+                    }
                 };
             });
         }

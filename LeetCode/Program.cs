@@ -11,6 +11,8 @@ namespace LeetCode
     {
         static void Main(string[] args)
         {
+            Test t = new Test();
+            //t.Run();
             Console.WriteLine("Hello World!");
             LeetCode1.Run();
             int target = 6;

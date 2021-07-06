@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DelegateDemo", "DelegateDem
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo-SendEmailService", "Demo-SendEmailService\Demo-SendEmailService.csproj", "{6AE4A9C7-F0EC-41CD-B710-5A75054A177F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo-AuthServer", "Demo-AuthServer\Demo-AuthServer.csproj", "{E1AC6084-2DF4-42B9-A4A9-5A79B99C262B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo-AuthServer", "Demo-AuthServer\Demo-AuthServer.csproj", "{E1AC6084-2DF4-42B9-A4A9-5A79B99C262B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisDemo", "RedisDemo\RedisDemo.csproj", "{AE66C614-7826-4905-9EE6-675639FBAD13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{E1AC6084-2DF4-42B9-A4A9-5A79B99C262B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1AC6084-2DF4-42B9-A4A9-5A79B99C262B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1AC6084-2DF4-42B9-A4A9-5A79B99C262B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE66C614-7826-4905-9EE6-675639FBAD13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE66C614-7826-4905-9EE6-675639FBAD13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE66C614-7826-4905-9EE6-675639FBAD13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE66C614-7826-4905-9EE6-675639FBAD13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

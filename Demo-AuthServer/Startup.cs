@@ -32,18 +32,13 @@ namespace Demo_AuthServer
         public void ConfigureServices(IServiceCollection services)
         {
 
-            //services.AddIdentityServer()
-            //    .AddDeveloperSigningCredential()
-            //    .AddJwtBearerClientAuthentication()
-            //    .AddInMemoryClients(InitConfig.GetClients())
-            //    .AddInMemoryApiResources(InitConfig.GetApiResources())
-            //    .AddInMemoryApiScopes(InitConfig.GetApiScopes())
-            //    .AddInMemoryIdentityResources(InitConfig.IdentityResources);
-
-            services.Configure<TokenManagement>(Configuration.GetSection("tokenManagement"));
-            var token = Configuration.GetSection("tokenManagement").Get<TokenManagement>();
-
-
+            services.AddIdentityServer()
+                .AddDeveloperSigningCredential()
+                .AddJwtBearerClientAuthentication()
+                .AddInMemoryClients(InitConfig.GetClients())
+                .AddInMemoryApiResources(InitConfig.GetApiResources())
+                .AddInMemoryApiScopes(InitConfig.GetApiScopes())
+                .AddInMemoryIdentityResources(InitConfig.IdentityResources);
 
         }
 
@@ -55,7 +50,7 @@ namespace Demo_AuthServer
                 app.UseDeveloperExceptionPage();
             }
 
-           // app.UseIdentityServer();
+            app.UseIdentityServer();
             app.UseRouting();
 
            
@@ -64,8 +59,11 @@ namespace Demo_AuthServer
             {
                 endpoints.MapGet("/", async context =>
                 {
+                    await context.Response.WriteAsync("hello world!");
 
-                    //私钥
+                    // JWT 生成token
+
+                    //对称加密  要16 长度的秘钥
                     //var token = Configuration.GetSection("tokenManagement").Get<TokenManagement>();
 
                     //var claims = new[]
@@ -78,53 +76,69 @@ namespace Demo_AuthServer
                     //var result = new JwtSecurityTokenHandler().WriteToken(jwtToken);
 
                     //非对称加密 https://www.bejson.com/enc/rsa/
-                    var claims = new[]
-                    {
-                        new Claim(ClaimTypes.Name,"xiaowu")
-                    };
-                    var rsa = RSA.Create();
-                    byte[] publicKey = Convert.FromBase64String(@"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDk8isuf9uHmpz7h8fxU/g+xS47
-PT837ep9JWtXXxKbMiUn415fcH7TF7MGppt3NIFzXJvMvCFl93HRc5rLcTgiavsQ
-p8guo2Xfmi / CTFoCfXh0A7CNR + jJa0DBztNErkB7SCHlSN8K4TmoBmWxZ269bD1y
-EKfw9r7ERv1JbWuUzwIDAQAB");
+                    //rsa 生成网址 https://travistidwell.com/jsencrypt/demo/  要用2048 的长度
 
-                    byte[] privateKey = Convert.FromBase64String(@"MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAOTyKy5/24eanPuH
-x / FT + D7FLjs9Pzft6n0la1dfEpsyJSfjXl9wftMXswamm3c0gXNcm8y8IWX3cdFz
-mstxOCJq + xCnyC6jZd + aL8JMWgJ9eHQDsI1H6MlrQMHO00SuQHtIIeVI3wrhOagG
-ZbFnbr1sPXIQp / D2vsRG / Ulta5TPAgMBAAECgYAA / 8WMeGZe2x / gQSFwPiuRKo8f
-Fw9VkSY60ZT8Vp / gKYHcALQCupzzEuFnIAcBqCsAc + ECLbf / l + rZPSXpyV6zVaLR
-8Hf6GHYgwSCgRugq7XQCiqx / cJEJv99R4553HJFD + qncEZKmAzXyBWrp1WlrU0O0
-Sz4zPjkT86kwOye4IQJBAPv0nG4MAEmemB6VgdR2ePhZreI9hb0qTjhyDrAhWFb +
-VQezTstosc190HZjsqE + 9vke50IVt57IqY7KWRn1 + ukCQQDonwB / oNKoWPz15C77
-92CvPwCYdoIdHRRXcdKA1t0YQ3NLUUoE4Fdps5Qazr / TYwgTURA5iqDMCaPng5hM
-V873AkEA2kI4EIyM4zljhXr2ENrgSCNHoiixZgDz6anEV4dLQ3Dmr9kAdOyoud43
-a5dJ8qzcvUmsA29UtVQWrf9T2E1hoQJAAcc9ZLxg / +J2RJby + QAiIBTWN1QomHph
-bm2zU0LRO99AIWJEs5bXdDpoNnBALSiDpkonWplBs22bcCikYGkHbwJBAO6cAAV7
-vz691j8kX6Tj5TaDS1Fbe20lPrBCl1zNPuZiPyGGi0qDs0TbuxndR0IwyAKLKBdt
-emceDNoSosNUc0c = ");
+                    //rsa 使用方法详解  https://vcsjones.dev/key-formats-dotnet-3/
 
-                    var tokenSetting = Configuration.GetSection("tokenManagement").Get<TokenManagement>();
-                    rsa.ImportPkcs8PrivateKey(privateKey, out _);
+                    //                    var claims = new[]
+                    //                    {
+                    //                        new Claim(ClaimTypes.Name,"xiaowu")
+                    //                    };
+                    //                    using var rsa = RSA.Create();
+                    //                    byte[] publicKey = Convert.FromBase64String(@"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCG//jEl+ZxhDm+NNgkK3ID9KTDlC+wuMTR+ZR8byl2vHuAgWDzr+868gZuoKHzEMXmr9S1NQm8FmdJn+pMRXtcr6r0co1qpB+zSta08B4OK6SWaViLaULn3W7LeIJRvwXMXlHG3ye5HGMCiuc/cch1r6iQFiprZbWz/Kxo7jgwOQIDAQAB");
 
-                    var key = new RsaSecurityKey(rsa);
-                    PrivateKeyStatus privateKeyStatus = key.PrivateKeyStatus;
+                    //                    byte[] privateKey = Convert.FromBase64String(@"MIIEowIBAAKCAQEAsGMsazCB50tjSoj8z4lf/InJTOxbSPwBaac8btxFKY5+Qg48
+                    //oZTk4Q5jjKqDVfBrh2ywURm5E0/IytljasPIcJbAOAZZF4Wu2623BUzLlcRopZAa
+                    //Hh/XzXcxfu4KkoD2nPNf15e58YgU+9GxVkEq/6quWU31YLxgXfbc/L9XPaK/iaRd
+                    //y4cpHD+e3r0sC7mZxL2w6rTp6AV2KdqBbYbgv9+1DahRLw1XmZNvNP1sHuZNK9pi
+                    //IwlD4rFmVbxexvzsXNfIKZIvLhJahUF04+ZeQEiIOEyA4hHwvj3d465UU8DbgNl6
+                    //sVjceLD9u2C93mtcc26xuHkD2bnC8ZAxuUhWkQIDAQABAoIBAEEBe8hRSz7L2N8K
+                    //V2nBLj/rI+YWoZnnTjn66VnOEis7maqMhqniLuwGmoen+9k7TtXNJ7nr6fqFB/JC
+                    //ZdJeL0vXMyYyqLjzirrpba8lW05p4UtLLWT2xViy2en2nqzZnInBZAwXne63AUzB
+                    //PkMUp10sMS82fP1Wz4kxxsXbWrKa4KSkbg1CNS8H3vjcbG2TdvsQS88JgrNvw1cQ
+                    //DXVEI0zPfGPeDBLFmhGLd8wuNsf7ymlraCIL2B9i26ZXHmzkb5ZT5MweYW4fUMME
+                    //WtcXCSIuLFigKOYhwuJ9Htgx/lssZX1LXTLmNeLnK/e9sf2+qVP4nwM/tKd9F4vs
+                    //cSj2wpUCgYEA2N/UkA5MHCF1DAHlUTbblu8tjKOTgPc2yiYicTDFEix0iMc6Dixn
+                    //pC6bAHSF2hLPeCLVGiuF52MNpfrgdf/m+C5efGaKeKcWH9e+ybZprKKEjaBnUOc1
+                    //vRkC1bjKch7Gv8rR3wZVxaUOpNs6J9uEYHribPGojAVR5/I9Ad845OMCgYEA0DV8
+                    //YaRtECreREtdyuP2I6olbmz0jqyLUSkxeHcpkOvkPotR+TCGCwSRHp2jaKUiU/fB
+                    //sgb3g9nA3eHETAcKzGqOFFbKTn3nj+w8EdCLf5YT9D8iECXSaHKOZp+TzTVXCLs5
+                    //jnADXfS+wQ4XPcegDeiQpXEXgRdc5UdAI7NwJPsCgYB4eJXGU/rZYYh4XBE7dQK0
+                    //LDacOj101V69GkPlppbCSqmNVUYdm3MTE8SMky3Lfsl6zbac6/JdH3v0aJEJW1a9
+                    //JFzeM8PV09MJazoTKN44xKpnVeQuX9FNMriNajIjBI+Y+JxujEFXIiIpV5JNk7ZM
+                    //NdbTd8YNyeK+uqRDBvG+ywKBgAwPTQkK0RZipUUnaGNcGOGv9UMUJIYvEFK/JBJq
+                    //NIokX7APucvJN7pjpVQ0pUZmajqa2ylIpgWJE1bGwOv2bHWyplAfRtCNEmCPulr9
+                    //zVayhq1bCsoMpsdN+1mOXK1CLaxfy9GoQ0mp53KfMlFtwqOLmPU8O7RKeiL9oYVv
+                    //20sJAoGBAM+BXiC+oERBCwepFqEmTOo//O/dqu/McHepPMX5k3HZDlLaId/ercWh
+                    //tK3jHrh2u//F758pWGabAM6xhe1KnjjnzBkvtbLj7Pmi9c9j1rmgWIQTVW9/fqrF
+                    //xTnypAjdwsNO2bq0adrPEN/1WUcJrSvS5hU38GIOzX9EPrNYpsz+");
+                    //                    var tokenSetting = Configuration.GetSection("tokenManagement").Get<TokenManagement>();
+                    //                    rsa.ImportRSAPrivateKey(privateKey, out _);
 
-                    //=====================================================================
+                    //                    var signingCredentials = new SigningCredentials(new RsaSecurityKey(rsa), SecurityAlgorithms.RsaSha256)
+                    //                    {
+                    //                        CryptoProviderFactory = new CryptoProviderFactory { CacheSignatureProviders = false }
+                    //                    }; 
 
-                    var token = new JwtSecurityToken(
-                        issuer: tokenSetting.Issuer,
-                        audience: tokenSetting.Audience,
-                        claims: claims,
-                        notBefore: DateTime.Now,
-                        expires: DateTime.Now.AddHours(2),
-                        signingCredentials: new SigningCredentials(key, SecurityAlgorithms.RsaSha256)
-                    //signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
-                    );
+                    //                    var now = DateTime.Now;
+                    //                    var unixTimeSeconds = new DateTimeOffset(now).ToUnixTimeSeconds();
+
+                    //                    var jwt = new JwtSecurityToken(
+                    //                        audience: tokenSetting.Audience,
+                    //                        issuer: tokenSetting.Issuer,
+                    //                        claims: new Claim[] {
+                    //                            new Claim(JwtRegisteredClaimNames.Iat, unixTimeSeconds.ToString(), ClaimValueTypes.Integer64),
+                    //                            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    //                            new Claim(ClaimTypes.Name, "xiaowu")
+                    //                        },
+                    //                        notBefore: now,
+                    //                        expires: now.AddMinutes(30),
+                    //                        signingCredentials: signingCredentials
+                    //                    );
+
+                    //                    var jwtToken = new JwtSecurityTokenHandler().WriteToken(jwt);
 
 
-                    var jwtToken = new JwtSecurityTokenHandler().WriteToken(token);
-
-                    await context.Response.WriteAsync(jwtToken);
                 });
             });
         }
