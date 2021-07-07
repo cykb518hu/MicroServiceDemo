@@ -27,7 +27,7 @@ namespace RedisApi
         {
             services.AddControllers();
 
-            services.AddSingleton(new RedisHelper("127.0.0.1:6379,password=klbr123456", "test", 0));
+            services.AddSingleton(new RedisHelper("49.234.95.20:6379", "test", 0));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -52,24 +52,34 @@ namespace RedisApi.Controllers
         [HttpGet]
 
         [Route("dotask")]
-        public async Task<string> DoTask()
+        public string DoTask()
         {
-            
-            var sql = "select stock from test.Xiaowu where id=1";
-            int count = await db.Ado.GetIntAsync(sql);
-            if (count > 0)
+
+            //var sql = "select stock from test.Xiaowu where id=1";
+            //int count = await db.Ado.GetIntAsync(sql);
+            //if (count > 0)
+            //{
+            //    await _redis.StringIncrementAsync("stock");
+            //    await db.Ado.ExecuteCommandAsync("update test.Xiaowu set Stock =Stock-1 where id=1");
+            //    return "success";
+            //}
+            //else
+            //{
+            //    return "fail";
+            //}
+            // var count = "0";
+
+            int count = (int) _redis.StringGet("stock");
+
+            if (count <= 50)
             {
-                await _redis.StringIncrementAsync("stock");
-                await db.Ado.ExecuteCommandAsync("update test.Xiaowu set Stock =Stock-1 where id=1");
+                 _redis.StringIncrementAsync("stock");
                 return "success";
             }
             else
             {
                 return "fail";
             }
-
-            
-
         }
     }
 
