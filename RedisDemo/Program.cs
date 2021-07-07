@@ -33,9 +33,13 @@ namespace RedisDemo
             Console.WriteLine(redisCahce.Conn.StringIncrement("achilles"));
             Console.WriteLine(redisCahce.Conn.StringIncrement("achilles"));
 
-            Console.WriteLine(redisCahce.Conn.StringDecrement("achilles"));
+            Console.WriteLine(redisCahce.Conn.StringIncrement("achilles",5));
 
+            Console.WriteLine(redisCahce.Conn.StringDecrement("achilles"));
+            Console.WriteLine(redisCahce.Conn.StringDecrement("achilles",2));
             Console.WriteLine(redisCahce.Conn.StringGet("achilles"));
+
+            
 
             Console.WriteLine("==========end==============");
         }

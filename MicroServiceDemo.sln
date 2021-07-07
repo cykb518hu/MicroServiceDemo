@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo-SendEmailService", "De
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo-AuthServer", "Demo-AuthServer\Demo-AuthServer.csproj", "{E1AC6084-2DF4-42B9-A4A9-5A79B99C262B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisDemo", "RedisDemo\RedisDemo.csproj", "{AE66C614-7826-4905-9EE6-675639FBAD13}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedisDemo", "RedisDemo\RedisDemo.csproj", "{AE66C614-7826-4905-9EE6-675639FBAD13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisApi", "RedisApi\RedisApi.csproj", "{0DAAE38E-DC86-4DC2-BE82-BEB891EDC8E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{AE66C614-7826-4905-9EE6-675639FBAD13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE66C614-7826-4905-9EE6-675639FBAD13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE66C614-7826-4905-9EE6-675639FBAD13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DAAE38E-DC86-4DC2-BE82-BEB891EDC8E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DAAE38E-DC86-4DC2-BE82-BEB891EDC8E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DAAE38E-DC86-4DC2-BE82-BEB891EDC8E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DAAE38E-DC86-4DC2-BE82-BEB891EDC8E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
