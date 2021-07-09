@@ -24,18 +24,11 @@ namespace Demo_AuthServer
                 new ApiResource("ApiName", "ApiName")
             };
         }
-        public static IEnumerable<IdentityResource> IdentityResources =>
-        new IdentityResource[]
-        {
-            new IdentityResources.OpenId(),
-            new IdentityResources.Profile(),
-        };
-
         public static IEnumerable<ApiScope> GetApiScopes()
         {
             return new List<ApiScope>
              {
-                 new ApiScope(name: "ApiName",   displayName: "Read your data."),
+                 new ApiScope(name: "api1",   displayName: "Read your data."),
                  new ApiScope(name: "write",  displayName: "Write your data."),
                  new ApiScope(name: "delete", displayName: "Delete your data."),
                  new ApiScope(name: "identityserverapi", displayName: "manage identityserver api endpoints.")
@@ -50,7 +43,7 @@ namespace Demo_AuthServer
                     ClientId="xiaowu",
                     ClientSecrets=new []{ new Secret("123456".Sha256())},
                     AllowedGrantTypes=GrantTypes.ClientCredentials,
-                    AllowedScopes=new []{ "ApiName" }
+                    AllowedScopes=new []{ "api1" }
                 }
             };
         }

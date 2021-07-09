@@ -1,9 +1,9 @@
-using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Ocelot.Provider.Consul;
@@ -21,14 +21,22 @@ namespace Demo_Gateway
         public void ConfigureServices(IServiceCollection services)
         {
 
+         
+            
             var key = "UserGatewayKey";
-            services.AddAuthentication("Bearer")
-                .AddIdentityServerAuthentication(key, option => {
-                    option.Authority = "http://localhost:5000";
-                    option.ApiName = "ApiName";
-                    option.RequireHttpsMetadata = false;
-                    option.SupportedTokens = SupportedTokens.Both;
+            services.AddAuthentication()
+                .AddJwtBearer(key, options =>
+                {
+                    options.Authority = "http://localhost:5002";
+
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateAudience = false,
+
+                    };
+                    options.RequireHttpsMetadata = false;
                 });
+
             services.AddOcelot()
                 .AddConsul();
         }
@@ -38,8 +46,8 @@ namespace Demo_Gateway
         {
             app.UseOcelot();
 
-            app.UseAuthentication();
-            app.UseAuthorization();
+            //app.UseAuthentication();
+           // app.UseAuthorization();
 
         }
     }

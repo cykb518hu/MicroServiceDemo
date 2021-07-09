@@ -9,7 +9,7 @@
       "LoadBalancerOptions": { "Type": "LeastConnection" },
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "UserGatewayKey",
-        "AllowedScopes": [ "api" ]
+        "AllowedScopes": []
       }
     },
     {
@@ -23,7 +23,7 @@
 
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:5001",
+    "BaseUrl": "http://localhost:5000",
     "ServiceDiscoveryProvider": {
       "Host": "1.15.60.122",
       "Port": 8100,

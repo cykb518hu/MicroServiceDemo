@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
@@ -22,6 +23,7 @@ namespace Demo_Service.Controllers
             _logger = logger;
             _configuration = configuration;
         }
+        [Authorize]
         [Route("list")]
         public async Task<IList<Student>> GetStudents()
         {

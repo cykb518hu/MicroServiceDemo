@@ -34,11 +34,10 @@ namespace Demo_AuthServer
 
             services.AddIdentityServer()
                 .AddDeveloperSigningCredential()
-                .AddJwtBearerClientAuthentication()
                 .AddInMemoryClients(InitConfig.GetClients())
-                .AddInMemoryApiResources(InitConfig.GetApiResources())
+                //.AddInMemoryApiResources(InitConfig.GetApiResources())
                 .AddInMemoryApiScopes(InitConfig.GetApiScopes())
-                .AddInMemoryIdentityResources(InitConfig.IdentityResources);
+                .AddInMemoryIdentityResources(InitConfig.GetIdentityResources()); // 针对ocelot 必须要加这一行 https://stackoverflow.com/questions/62645604/asp-net-core-3-0-identity-server-4-4-0-0-securitytokeninvalidaudienceexception
 
         }
 

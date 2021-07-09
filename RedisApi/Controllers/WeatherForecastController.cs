@@ -19,7 +19,7 @@ namespace RedisApi.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
-        private  SqlSugarClient db;
+        private SqlSugarClient db;
 
         private readonly IDatabase _redis;
         public WeatherForecastController(ILogger<WeatherForecastController> logger, RedisHelper client)
@@ -59,7 +59,6 @@ namespace RedisApi.Controllers
             //int count = await db.Ado.GetIntAsync(sql);
             //if (count > 0)
             //{
-            //    await _redis.StringIncrementAsync("stock");
             //    await db.Ado.ExecuteCommandAsync("update test.Xiaowu set Stock =Stock-1 where id=1");
             //    return "success";
             //}
@@ -69,20 +68,45 @@ namespace RedisApi.Controllers
             //}
             // var count = "0";
 
-            int count = (int) _redis.StringGet("stock");
-
-            if (count <= 50)
-            {
-                 _redis.StringIncrementAsync("stock");
-                return "success";
-            }
-            else
+            var num = _redis.StringDecrement("stock");
+            if (num < 0)
             {
                 return "fail";
             }
+            else
+            {
+                return "success";
+            }
         }
+
+
+        [HttpGet]
+
+        [Route("hashtask")]
+        public string Hashtask()
+        {
+
+            string hashId = "xiaowu";
+            //_redis.HashSet(hashId, "age", 32);
+           // _redis.HashSet(hashId, "name", "xiaowu");
+
+            var user = new Student { Id = 1, Name = "xiaowu" };
+
+
+            _redis.ListRightPush("list", 1);
+            //var result = _redis.HashGet(hashId, "age") + _redis.HashGet(hashId, "name");
+
+            var result = "";
+            return result;
+        }
+
     }
 
+    public class Student
+    {
+        public string Name { get; set; }
+        public int Id { get; set; }
+    }
     public class RedisCahce
     {
         public readonly IDatabase Conn;
