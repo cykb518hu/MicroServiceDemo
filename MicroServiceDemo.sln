@@ -25,7 +25,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo-AuthServer", "Demo-Aut
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedisDemo", "RedisDemo\RedisDemo.csproj", "{AE66C614-7826-4905-9EE6-675639FBAD13}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisApi", "RedisApi\RedisApi.csproj", "{0DAAE38E-DC86-4DC2-BE82-BEB891EDC8E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedisApi", "RedisApi\RedisApi.csproj", "{0DAAE38E-DC86-4DC2-BE82-BEB891EDC8E2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMQ-Common", "RabbitMQ-Common\RabbitMQ-Common.csproj", "{0D07647B-0777-4E1A-90DC-653223F72809}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQ-Provider", "RabbitMQ-Provider\RabbitMQ-Provider.csproj", "{3E55EAED-3C74-4565-8639-2A251C0DB77A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +85,14 @@ Global
 		{0DAAE38E-DC86-4DC2-BE82-BEB891EDC8E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DAAE38E-DC86-4DC2-BE82-BEB891EDC8E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DAAE38E-DC86-4DC2-BE82-BEB891EDC8E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D07647B-0777-4E1A-90DC-653223F72809}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D07647B-0777-4E1A-90DC-653223F72809}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D07647B-0777-4E1A-90DC-653223F72809}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D07647B-0777-4E1A-90DC-653223F72809}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E55EAED-3C74-4565-8639-2A251C0DB77A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E55EAED-3C74-4565-8639-2A251C0DB77A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E55EAED-3C74-4565-8639-2A251C0DB77A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E55EAED-3C74-4565-8639-2A251C0DB77A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
